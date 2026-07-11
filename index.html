@@ -93,7 +93,7 @@ button:hover {
 <div class="results" id="results">
 
 <div class="row">
-<span>401(k) (6%)</span>
+<span>401(k) (3%)</span>
 <span id="k401"></span>
 </div>
 
@@ -115,16 +115,6 @@ button:hover {
 <div class="row">
 <span>Taxes (12%)</span>
 <span id="taxes"></span>
-</div>
-
-<div class="row">
-<span>Savings</span>
-<span id="savings"></span>
-</div>
-
-<div class="row">
-<span>Index Fund</span>
-<span id="index"></span>
 </div>
 
 <hr>
@@ -149,12 +139,9 @@ function calculate(){
 
     if(isNaN(gross) || gross <= 0) return;
 
-    const k401 = gross * 0.06;
+    const k401 = gross * 0.03;
     const donation = 4;
     const health = 27.50;
-    const savings = 50;
-    const index = 25;
-
     const taxable = gross - k401 - health;
     const taxes = taxable * 0.12;
 
@@ -163,17 +150,14 @@ function calculate(){
         k401 -
         donation -
         health -
-        taxes -
-        savings -
-        index;
+        taxes;
+
 
     document.getElementById("k401").textContent = money(k401);
     document.getElementById("donation").textContent = money(donation);
     document.getElementById("health").textContent = money(health);
     document.getElementById("taxable").textContent = money(taxable);
     document.getElementById("taxes").textContent = money(taxes);
-    document.getElementById("savings").textContent = money(savings);
-    document.getElementById("index").textContent = money(index);
     document.getElementById("net").textContent = money(net);
 
     document.getElementById("results").style.display = "block";
