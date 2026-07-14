@@ -93,7 +93,7 @@ button:hover {
 <div class="results" id="results">
 
 <div class="row">
-<span>401(k) (3%)</span>
+<span>401(k) (6%)</span>
 <span id="k401"></span>
 </div>
 
@@ -139,7 +139,7 @@ function calculate(){
 
     if(isNaN(gross) || gross <= 0) return;
 
-    const k401 = gross * 0.03;
+    const k401 = gross * 0.06;
     const donation = 4;
     const health = 27.50;
     const taxable = gross - k401 - health;
