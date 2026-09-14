@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Paycheck Calculator</title>
+
 <style>
 body {
     font-family: system-ui, sans-serif;
@@ -13,6 +14,7 @@ body {
     align-items: center;
     min-height: 100vh;
 }
+
 .card {
     background: white;
     padding: 2rem;
@@ -20,14 +22,17 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,.1);
     width: 420px;
 }
+
 h1 {
     margin-top: 0;
 }
+
 label {
     display: block;
     margin-top: 1rem;
     font-weight: bold;
 }
+
 input {
     width: 100%;
     padding: .6rem;
@@ -35,6 +40,7 @@ input {
     margin-top: .3rem;
     box-sizing: border-box;
 }
+
 button {
     width: 100%;
     margin-top: 1.5rem;
@@ -46,9 +52,11 @@ button {
     font-size: 1rem;
     cursor: pointer;
 }
+
 button:hover {
     background: #1d4ed8;
 }
+
 .results {
     margin-top: 1.5rem;
     background: #f1f5f9;
@@ -56,11 +64,13 @@ button:hover {
     border-radius: 12px;
     display: none;
 }
+
 .row {
     display: flex;
     justify-content: space-between;
     margin: .45rem 0;
 }
+
 .net {
     font-size: 1.2rem;
     font-weight: bold;
@@ -68,83 +78,90 @@ button:hover {
 }
 </style>
 </head>
+
 <body>
+
 <div class="card">
+
 <h1>Paycheck Calculator</h1>
+
 <label>Gross Pay ($)</label>
 <input id="gross" type="number" step="0.01" placeholder="Enter gross pay">
+
 <button onclick="calculate()">Calculate</button>
+
 <div class="results" id="results">
+
 <div class="row">
 <span>401(k) (3%)</span>
 <span id="k401"></span>
 </div>
+
 <div class="row">
 <span>United Way</span>
 <span id="donation"></span>
 </div>
+
 <div class="row">
 <span>Health Insurance</span>
 <span id="health"></span>
 </div>
+
 <div class="row">
 <span>Taxable Income</span>
 <span id="taxable"></span>
 </div>
+
 <div class="row">
 <span>Taxes (12%)</span>
 <span id="taxes"></span>
 </div>
+
 <hr>
-<div class="row">
-<span>Savings</span>
-<span id="savings"></span>
-</div>
-<div class="row">
-<span>Brokerage Account</span>
-<span id="brokerage"></span>
-</div>
-<hr>
+
 <div class="row net">
-<span>Remaining Pay</span>
+<span>Net Pay</span>
 <span id="net"></span>
 </div>
+
 </div>
+
 </div>
+
 <script>
 function money(num){
     return "$" + num.toFixed(2);
 }
+
 function calculate(){
+
     const gross = parseFloat(document.getElementById("gross").value);
+
     if(isNaN(gross) || gross <= 0) return;
+
     const k401 = gross * 0.03;
     const donation = 4;
     const health = 27.50;
-    // Taxable income is calculated before savings/brokerage
     const taxable = gross - k401 - health;
     const taxes = taxable * 0.12;
-    // Post-tax deductions
-    const savings = 150;
-    const brokerage = 25;
+
     const net =
         gross -
         k401 -
         donation -
         health -
-        taxes -
-        savings -
-        brokerage;
+        taxes;
+
     document.getElementById("k401").textContent = money(k401);
     document.getElementById("donation").textContent = money(donation);
     document.getElementById("health").textContent = money(health);
     document.getElementById("taxable").textContent = money(taxable);
     document.getElementById("taxes").textContent = money(taxes);
-    document.getElementById("savings").textContent = money(savings);
-    document.getElementById("brokerage").textContent = money(brokerage);
     document.getElementById("net").textContent = money(net);
+
     document.getElementById("results").style.display = "block";
 }
 </script>
+
 </body>
 </html>
